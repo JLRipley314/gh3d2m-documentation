@@ -8,6 +8,7 @@ basic installation guidance.
 
 ## Contact
 
-For questions/comments
+Please let me know if you would like to add to any of the documentation,
+or if anything is unclear.
 
-Justin L. Ripley: lloydripley [at] gmail [dot] com
+lloydripley [at] gmail [dot] com
