@@ -1,0 +1,714 @@
+\documentclass{article}
+\usepackage[margin=0.5in]{geometry}
+\usepackage{amsmath,amssymb}
+\usepackage{array,booktabs,makecell}
+\usepackage{hyperref}
+
+\title{gh3d2m parameter file definitions}
+\author{}
+\date{\today}
+ 
+\begin{document}
+ 
+\maketitle
+ 
+%=============================================================================
+\section*{Introduction}
+ 
+Definitions for parameter files for the \texttt{gh3d2m}
+numiercal relativity code.
+See \cite{Pretorius:2004jg} for a general description of the code,
+and \cite{Pretorius:2006tp} for a description of binary black hole
+evolution with the code.
+
+\newpage
+%=============================================================================
+\section*{General definitions}
+\begin{table}[h]
+   \centering 
+   \begin{tabular}{ccc}
+      Parameter  & Allowed values & Purpose \\
+     \midrule\midrule
+      lambda
+      &
+      $\left[0,1\right]$ 
+      & 
+      CFL number $\Delta t = \lambda \Delta x$
+      \\ \\
+      steps 
+      &
+      $\mathbb{N}$
+      &
+      Number of time steps to take.
+      \\ \\
+      tn\_eps\_diss 
+      &
+      $\left[0,1\right]$
+      & Kreiss-Oliger dissipation parameter
+      \\ \\
+      diss\_use\_6th\_order 
+      &
+      $\left\{0,1\right\}$
+      &
+      (Do not) use $6^{th}$ order Kreiss-Oliger dissipation stencils.
+      \\ \\
+      cp\_restart 
+      &
+      $\left\{0,1\right\}$
+      &
+      (Do not) restart from a checkpoint file
+      \\ \\
+      cp\_restore\_fname 
+      &
+      \texttt{string}
+      &
+      Starting name of checkpoint file.
+      \\ \\
+      cp\_delta\_t\_hrs 
+      &
+      $\mathbb{R}_+$
+      &
+      Checkpoint after this number of hours
+      \\ \\
+      cp\_save\_fname 
+      &
+      \texttt{string}
+      &
+      Name of checkpoint file to save. 
+      \\ \\
+      use\_AH\_as\_FS 
+      &
+      $\mathbb{N}$
+      &
+      ??
+      \\ \\
+      FS\_radius\{\_2\}
+      &
+      $\mathbb{R}_+$
+      &
+      ??
+      \\ \\
+      ej\_rmax 
+      &
+      $\mathbb{R}_+$
+      &
+      ??
+   \end{tabular}
+\end{table}
+
+\newpage
+%=============================================================================
+\section*{Output parameters}
+\begin{table}[h]
+   \centering 
+   \begin{tabular}{ccc}
+      Parameter  & Allowed values & Purpose \\
+      \midrule\midrule
+      save\_tag 
+      &
+      \texttt{string}
+      &
+      File save beginning.
+      \\ \\
+      save\_\{1,2\}\_vars &
+      Vector $\left[\mathtt{string}\right]$
+      &
+      Variables to save from level 1,2
+      \\ \\
+      save\_ivec\{\_3\} 
+      &
+      $1-*/n,n\in\mathbb{N}$
+      &
+      Save every $n$ time steps
+      \\ \\
+      save\_all\_finer 
+      &
+      $\left\{0,1\right\}$
+      &
+      ??
+      \\ \\
+      save\_iter\_mod 
+      &
+      $\left\{0,1\right\}$
+      &
+      ??
+   \end{tabular}
+\end{table}
+
+\newpage
+%=============================================================================
+\section*{Psi4 variables}
+\begin{table}[h]
+   \centering 
+   \begin{tabular}{ccc}
+      Parameter  & Allowed values & Purpose \\
+      \midrule\midrule
+      num\_Psi4S 
+      &
+      $\mathbb{N}$
+      &
+      ??
+      \\ \\
+      Psi4S\_radius0 
+      &
+      $\mathbb{R}_+$
+      &
+      ??
+      \\ \\
+      Psi4S\_radius1 
+      &
+      $\mathbb{R}_+$
+      &
+      ??
+      \\ \\
+      Psi4S\_N\{theta,phi\}
+      &
+      $2^n+1,n\in\mathbb{N}$
+      &
+      Number of points in theta, phi angular direction. 
+      \\ \\
+      Psi4S\_Lmin 
+      &
+      $\mathbb{N}$
+      &
+      ??
+   \end{tabular}
+\end{table}
+
+\newpage
+
+\newpage
+%=============================================================================
+\section*{AMR grid parameters}
+\begin{table}[h]
+   \centering 
+   \begin{tabular}{ccc}
+      Parameter  & Allowed values & Purpose \\
+      \midrule\midrule
+      base\_shape 
+      &
+      $\left[
+         \mathtt{int} \;
+         \mathtt{int} \;
+         \mathtt{int}
+      \right]$
+      &
+      Number of points of base grid.
+      \\ \\ 
+      base\_bbox 
+      &
+      $\left[
+         \mathtt{int} \; \mathtt{int} \;
+         \mathtt{int} \; \mathtt{int} \;
+         \mathtt{int} \; \mathtt{int} \;
+      \right]$
+      &
+      Bounding box of the base grid (xmin, xmax, ymin, ymax, zmin, zmax).
+      \\ \\
+      max\_lev 
+      &
+      $\mathbb{N}$
+      &
+      Maximum number of AMR levels
+      \\ \\
+      init\_depth
+      &
+      $\mathbb{N}$
+      &
+      Initial number of AMR levels.
+      \\ \\
+      init\_bbox\_\{n\}
+      &
+      $\left[
+         \mathtt{int} \; \mathtt{int} \;
+         \mathtt{int} \; \mathtt{int} \;
+         \mathtt{int} \; \mathtt{int} \;
+      \right]$
+      &
+      Bounding box coordinates for the $n^{th}$
+      initial AMR level.
+      \\
+      & & 
+      If you specify $n$ twice, then there are initiall two
+      \\
+      & & 
+      different AMR grids at that level.
+   \end{tabular}
+\end{table}
+
+\newpage
+%=============================================================================
+\section*{Gauge/formulation definitions}
+
+\begin{table}[h]
+   \centering 
+   \begin{tabular}{ccc}
+      Parameter  & Allowed values & Purpose \\
+     \midrule\midrule
+      harmonize
+      &
+      \{0,1\}
+      & (Do not) set the time derivative of the lapse
+      and shift so that $\Box x^a=0$.
+      \\ \\
+      a\_tilde
+      &
+      $\left[0,1\right]$
+      &
+      Modified generalized harmonic parameter; see
+      \cite{East:2020hgw}.
+      \\
+      & & 
+      Sets $\tilde{A}$ parameter in 
+      $\tilde{g}^{ab} = g^{ab} - \tilde{A} n^an^b$
+      \\ \\
+      a\_ghat 
+      &
+      $\left[0,1\right]$
+      &
+      Modified generalized harmonic parameter; see
+      \cite{East:2020hgw}.
+      \\
+      & & 
+      Sets $\hat{A}$ parameter in 
+      $\hat{g}^{ab} = g^{ab} - \hat{A} n^an^b$
+      \\ \\
+      kappa\_cd 
+      & 
+      $\mathbb{R}_-$
+      &
+      Constraint damping parameter $\kappa$
+      \\ \\
+      kappa\_cd\_cosn 
+      &
+      $\mathbb{N}$
+      &
+      Asymptotic falloff of the damping parameter (usually: 4)
+      \\ \\
+      rho\_cd 
+      &
+      $\mathbb{R}_+$
+      &
+      Constraint damping parameter $\rho$
+   \end{tabular}
+\end{table}
+
+\newpage
+%=============================================================================
+\section*{Truncation error tagging parameters}
+
+\begin{table}[h]
+   \centering 
+   \begin{tabular}{ccc}
+      Parameter  & Allowed values & Purpose \\
+      \midrule\midrule
+      TRE\_max &
+      $\mathbb{R}_+$
+      &
+      Maximum truncation error before tag for regridding.
+      \\ \\
+      TRE\_vars 
+      &
+      Vector $\left[ \mathtt{string} \right]$
+      &
+      Gridfunctions to sum over for tagging
+      \\ \\
+      TRE\_buffer
+      &
+      $\mathbb{N}$
+      &
+      Buffer size between tagging zones(?)
+      \\ \\
+      TRE\_ibc\_\{\_a\}\_buffer 
+      &
+      $\mathbb{N}$
+      &
+      ??
+      \\ \\
+      TRE\_exc\_buffer\{\_lmin\}
+      &
+      $\mathbb{N}$
+      &
+      Number of points around excision surface that are not considered
+      \\
+      & & 
+      for truncation error tagging (as excision surface can be ``noisy'').
+      \\ \\
+      TRE\_ibcp\_buffer
+      &
+      $\mathbb{N}$
+      &
+      ??
+      \\ \\
+      TRE\_sgpbh
+      &
+      $\mathbb{N}$
+      &
+      ??
+      \\ \\
+      TRE\_norm
+      &
+      $\mathbb{N}$
+      &
+      ??
+      \\ \\
+      regrid\_interval 
+      &
+      $\mathbb{N}$
+      &
+      Regrid every number of time steps. 
+      \\ \\
+      regrid\_min\_lev &
+      $\mathbb{N}$
+      &
+      Regrid on at least this level
+      \\ \\
+      regrid\_script := 2
+      &
+      $\mathbb{N}$
+      &
+      ??
+      \\ \\
+      regrid\_script\_name 
+      &
+      \texttt{string}
+      &
+      ??
+   \end{tabular}
+\end{table}
+
+\newpage
+%=============================================================================
+\section*{Apparent horizon search parameters}
+
+\begin{table}[h]
+   \centering 
+   \begin{tabular}{ccc}
+      Parameter  & Allowed values & Purpose \\
+      \midrule\midrule
+      AH\_N\{theta,phi\}\{\_2,\_3\} 
+      &
+      $2^n+1$
+      &
+      Number of grid points in theta/phi direction for search algorithm
+      \\
+      & & for black hole 1,2,3
+      \\ \\
+      AH\_Lmin\{\_3\} 
+      &
+      $\mathbb{N}$
+      &
+      ??
+      \\ \\
+      AH\_Lmax 
+      &
+      $\mathbb{N}$
+      &
+      ??
+      \\ \\
+      AH\_max\_iter\{\_2,3\} 
+      &
+      $\mathbb{N}$
+      &
+      ??
+      \\ \\
+      AH\_freq\{\_aft,\_3,\_aft\_3\}
+      &
+      $\mathbb{N}$
+      &
+      ??
+      \\ \\
+      AH\_tol\{\_aft,\_3,\_aft\_3\}
+      &
+      $\mathbb{R}_+$
+      &
+      Tolerance to solve for apparent horizon.
+      \\ \\
+      AH\_max\_tol\_inc 
+      &
+      $\mathbb{N}$
+      &
+      ??
+      \\ \\
+      AH\_reset\_scale 
+      &
+      $\mathbb{R}$
+      &
+      ??
+      \\ \\
+      AH\_r0 
+      &
+      $\mathbb{R}$
+      &
+      ??
+      \\ \\
+      AH\_r1 
+      &
+      $\mathbb{R}$
+      &
+      ??
+      \\ \\
+      AH\_rsteps &
+      $\mathbb{N}$
+      &
+      ??
+      \\ \\
+      AH\_lambda\{\_min,\_3,\_min\_3\}
+      &
+      $\mathbb{R}_+$
+      &
+      CFL number for apparent horizon search algorithm.
+      \\ \\
+      AH\_maxinc 
+      &
+      $\mathbb{N}$
+      &
+      ??
+      \\ \\
+      AH\_eps 
+      &
+      1.5
+      &
+      ??
+      \\ \\
+      AH\_xc &
+      Vector: $\left[ 
+         \mathbb{R} \; \mathbb{R} \; \mathbb{R} 
+      \right]$
+      &
+      ??
+      \\ \\ 
+      AH\_tmin\{\_3\} 
+      &
+      $\mathbb{R}$
+      &
+      ??
+      \\ \\ 
+      use\_AH\_new\_smooth
+      &
+      $\mathbb{N}$
+      &
+      ??
+   \end{tabular}
+\end{table}
+
+\newpage
+%=============================================================================
+\section*{Excision surface parameters}
+
+\begin{table}[h]
+   \centering 
+   \begin{tabular}{ccc}
+      Parameter  & Allowed values & Purpose \\
+      \midrule\midrule
+      do\_ex 
+      &
+      $\left\{0,1\right\}$
+      &
+      (Do not) excise
+      \\ \\
+      ex 
+      &
+      $\mathbb{R}_+$
+      &
+      ??
+      \\ \\
+      ex\_rmin 
+      & 
+      $\mathbb{R}_+$
+      &
+      Minimum radius to excise
+      \\ \\
+      ex\_rbuf\_reset
+      &
+      $\left\{0,1\right\}$
+      &
+      (Do not) reset excision buffers.
+      \\
+      \\ \\
+      ex\_rbuf\{\_a\}\{\_2,3\}
+      &
+      $\mathbb{R}_+$
+      &
+      Excision buffer inside inside apparent
+      \\
+      & & 
+      as a fraction of the apprent horizon radius.
+      For black hole 1,2,3.
+      \\
+      & &
+      \_a is the buffer after the first time step.
+      \\ \\
+      ex\_reset\_rbuf 
+      &
+      $\mathbb{N}$
+      &
+      ??
+      \\ \\
+      ex\_max\_repop 
+      &
+      $\mathbb{N}$
+      &
+      ??
+      \\ \\
+      ex\_repop\_io
+      &
+      $\mathbb{N}$
+      &
+      ??
+      \\ \\
+      ex\_dphi\_repop
+      &
+      $\mathbb{N}$
+      &
+      ??
+      \\ \\
+      ex\_relative\_rbuf
+      &
+      $\mathbb{N}$
+      &
+      ??
+      \\ \\
+      ex\_max\_rbuf
+      &
+      $\mathbb{R}_+$
+      &
+      ??
+      \\ \\
+      ex\_freeze\_r\_omt
+      &
+      $\mathbb{N}$
+      &
+      ??
+   \end{tabular}
+\end{table}
+
+\newpage
+%=============================================================================
+\section*{General initial data parameters}
+\begin{table}[h]
+   \centering 
+   \begin{tabular}{ccc}
+      Parameter  & Allowed values & Purpose \\
+      \midrule\midrule
+      use\_harm\_kerr
+      &
+      $\left\{0,1\right\}$
+      &
+      Whether or not to use harmonic coordinates for black holes.
+   \end{tabular}
+\end{table}
+
+\newpage
+%=============================================================================
+\section*{TwoPunctures definitions}
+
+For use with the Standalone TwoPunctures code,
+see \href{https://github.com/JLRipley314/Standalone-TwoPunctures-C-Cpp}{here}.
+
+\begin{table}[h]
+   \centering 
+   \begin{tabular}{ccc}
+      Parameter  & Allowed values & Purpose \\
+     \midrule\midrule
+      TP\_use\_twopunctures 
+      & \{0,1\} & (Do not) use 
+      \\ \\
+      TP\_points\_A
+      & $\mathbb{N}$ 
+      & Number of collocation points
+      \\ \\
+      TP\_points\_B
+      & $\mathbb{N}$ 
+      & Number of collocation points
+      \\ \\
+      TP\_points\_phi 
+      & $\left\{4n, n\in\mathbb{N}\right\}$ 
+      & Number of collocation points in phi direction
+      \\ \\
+      TP\_lapse\_kind 
+      & $\mathbb{N}$ 
+      & Kind of initial lapse used; see source code 
+      \\ \\
+      TP\_offset\_\{plus,minus\} 
+      & $\mathbb{R}$ 
+      & Location (in uncompactified space) of the
+      plus/minus black hole
+      \\ \\
+      TP\_target\_M\_\{plus,minus\} 
+      & $\mathbb{R}_+$ 
+      & Target mass of the plus/minus black hole
+      \\ \\
+      TP\_par\_P\_\{plus,minus\}\_\{x,y,z\} 
+      & $\mathbb{R}$ 
+      & Initial momentum vector  
+      \\ \\
+      TP\_par\_S\_\{plus,minus\}\_\{x,y,z\} 
+      & $\mathbb{R}$ 
+      & Initial spin vector 
+      \\ \\
+   \end{tabular}
+\end{table}
+
+\newpage
+%=============================================================================
+\section*{Einstein scalar Gauss-Bonnet parameters}
+See \cite{East:2020hgw}.
+\begin{table}[h]
+   \centering 
+   \begin{tabular}{ccc}
+      Parameter  & Allowed values & Purpose \\
+      \midrule\midrule
+      csf\_on 
+      &
+      $\left\{0,1\right\}$
+      &
+      (Do not) evolve scalar field
+      \\ \\
+      lambda\_mg 
+      &
+      $\mathbb{R}$
+      &
+      scalar GB coupling $\lambda$ in $\lambda\phi\mathcal{G}$
+      \\ \\
+      ts\_mg 
+      &
+      $\mathbb{R}_+$
+      &
+      Time to turn on scalar Gauss-Bonnet couplings as a funtion of $M$.
+      \\ \\
+      \{ts,te\}\_damp\_mg 
+      &
+      $\mathbb{R}_+$
+      &
+      Time to start reducing coupling parameter.
+      \\ \\
+      damp\_mg\_r 
+      &
+      Vector, $\left[
+         \mathbb{R}_+ \; \mathbb{R}_+ \; \mathbb{R}_+
+      \right]$
+      &
+      Radii of ellipsoid region (in compactified coordinates) 
+      \\
+      & & 
+      where coupling is reduced.
+      \\ \\
+      damp\_mg\_rbuf 
+      &
+      $\mathbb{R}_+$
+      &
+      Fractional radius over which coupling goes to zero,
+      \\
+      & & 
+      i.e. coupling decreases from full value to zero in the outer 
+      \\
+      & & 
+      buffer region making up this fraction of the radius of the above region.
+   \end{tabular}
+\end{table}
+%=============================================================================
+\bibliographystyle{unsrt}
+\bibliography{../mod_grav}
+%=============================================================================
+\end{document}
