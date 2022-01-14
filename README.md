@@ -6,6 +6,11 @@ and its various derivatives/offshoots.
 See the `INSTALL.md` file for a list of dependencies and some
 basic installation guidance.
 
+For more detailed information about the software ecosystem
+that `gh3d2m` came from, see Matthew Coptuik's 
+[website](http://laplace.physics.ubc.ca/)
+(under ``Software \& Related'').
+
 ## Contact
 
 Please let me know if you would like to add to any of the documentation,
