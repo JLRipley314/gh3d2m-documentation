@@ -398,25 +398,28 @@ evolution with the code.
       &
       $\mathbb{N}$
       &
-      ??
+      Minimum AMR level to search for apparent horizon.
       \\ \\
       AH\_Lmax 
       &
       $\mathbb{N}$
       &
-      ??
+      Maximum AMR level to search for apparent horizon.
       \\ \\
       AH\_max\_iter\{\_2,3\} 
       &
       $\mathbb{N}$
       &
-      ??
+      Maximum number of iterations in elliptic solver search for AH.
       \\ \\
       AH\_freq\{\_aft,\_3,\_aft\_3\}
       &
       $\mathbb{N}$
       &
-      ??
+      How many time steps on largest AMR level 
+      \\
+      & & 
+      until search for a new apparent horizon.
       \\ \\
       AH\_tol\{\_aft,\_3,\_aft\_3\}
       &
@@ -575,11 +578,11 @@ evolution with the code.
       &
       ??
       \\ \\
-      ex\_freeze\_r\_omt
+      ex\_freeze\_r\_omt\{\_2,\_3\}
       &
-      $\mathbb{N}$
+      \{0,1\}
       &
-      ??
+      (Do not) freeze AH surface (1,2,3) if can't find new one
    \end{tabular}
 \end{table}
 
