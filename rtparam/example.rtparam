@@ -1,0 +1,316 @@
+# Example .rtparam file. This paramter file sets 
+# black hole initial data using the ``twopunctures''
+# library (see 
+# https://github.com/JLRipley314/Standalone-TwoPunctures-C-Cpp
+# for a C interface that I have used with gh3d2m).
+#
+#---------- Two Punctures initial data ------------------
+# Initial sepearation 24m1 (m_1==0.5*m_2 in this case)
+# This means ~5 orbits, and ~500M of evolution until merger (in GR)
+#
+# The initial data are taken from the 2.5PNinspired Mathematica notebook
+#
+use_idreader := 0
+idreader_num_files := 40 
+idreader_file_prefix := "IDSolve_BHBH_"
+
+#Twopunctures
+TP_use_twopunctures := 1
+TP_npoints_A := 60
+TP_npoints_B := 60
+TP_npoints_phi := 40
+TP_lapse_kind := 0
+# location along x axis of first black hole
+TP_offset_plus :=   0.0533333333333333333333333333333333333333
+TP_target_M_plus := 0.0033333333333333333333333333333333333333
+TP_par_P_plus_x := -0.0000105597
+TP_par_P_plus_y := -0.00100051
+TP_par_P_plus_z :=  0.0
+TP_par_S_plus_x :=  0.0
+TP_par_S_plus_y :=  0.0
+TP_par_S_plus_z :=  0.0
+# location along x axis of second black hole
+TP_offset_minus :=  -0.0266666666666666666666666666666666666666
+TP_target_M_minus := 0.0066666666666666666666666666666666666666
+TP_par_P_minus_x :=  0.0000105597 
+TP_par_P_minus_y :=  0.00100051 
+TP_par_P_minus_z :=  0.0
+TP_par_S_minus_x :=  0.0
+TP_par_S_minus_y :=  0.0
+TP_par_S_minus_z :=  0.0
+
+#Aux. metric parameters
+a_gtilde := 0.2
+a_ghat := 0.4
+
+#Number of time steps
+steps := 400
+
+## scalar field on
+csf_on := 0
+lambda_mg := 0.0 
+## turn scalarization on at 50 M
+ts_mg := 0.5
+
+##Time to start reducing coupling parameter 
+##(set this to some time before the simulation crashes)
+#ts_damp_mg := 2.2
+
+##Time to stop reducing coupling parameter
+#te_damp_mg := 5.0
+
+##Radii of ellipsoid region (in compactified coordinates) 
+##where couplingis reduced
+#damp_mg_r := [0.05 0.05 0.05]
+
+##Fractional radius over which coupling goes to zero
+##I.e. coupling decreases from full value to zero in the outer buffer region
+##making up this fraction of the radius of the above region
+#damp_mg_rbuf := 0.2
+
+use_AH_as_FS := 3
+FS_radius := 0.5
+FS_radius_2 := 1.0
+ej_rmax := 0.5
+
+#Ouput parameters
+save_tag := "mgh_bhbh_r0_l0_01"
+#save_2_vars := [ "gb_tt" "gb_xx" "Hb_t" "Hb_x" "gb_tt_t" "gb_tx_t" ]
+save_2_vars := [ "gb_tt" "phi_r" "phi_r_t" ]
+save_1_vars := [ "norm_cnst" "psi4_r" "psi4_i" "E_sf" ] 
+save_ivec := 1-*/4
+save_ivec_3 := 1-*/1
+#save_all_finer := 1
+#save_iter_mod := 1
+
+#AMR grid parameters
+#base_shape := [257 129]
+#base_shape := [129 65]
+base_shape := [51 51 51]
+#base_shape := [33 33 33]
+base_bbox := [-1 1 -1 1 -1 1]
+max_lev := 9
+init_depth := 9
+#
+# refinement for both black holes
+# NOTE: Refinement boxes are in compactified coordinates.
+#       This means the black holes are at 
+#       atan( 0.053333)*2/pi ~  0.0339209
+#       atan(-0.026666)*2/pi ~ -0.0169725
+# NOTE: The bounding boxes (bbox) need to be aligned with the grid cells
+#
+init_bbox_3 := [-0.56 0.56 -0.56 0.56 -0.56 0.56]
+init_bbox_4 := [-0.28 0.28 -0.28 0.28 -0.28 0.28]
+init_bbox_5 := [-0.14 0.14  0.1  0.1  -0.1  0.1]
+init_bbox_6 := [-0.055 0.075 -0.05 0.05 -0.05 0.05]
+init_bbox_7 := [-0.0475 0.0475 -0.0325 0.0325 -0.0325 0.0325]
+# black hole to the right
+init_bbox_8 := [0.015 0.0525 -0.0225 0.0225 -0.0225 0.0225]
+init_bbox_9 := [0.02 0.0425 -0.0125 0.0125 -0.0125 0.0125]
+init_bbox_10 := [0.025625 0.040625 -0.009375 0.009375 -0.009375 0.009375]
+# black hole to the left 
+init_bbox_b_8 := [-0.04 0.0 -0.0225 0.0225 -0.0225 0.0225]
+init_bbox_b_9 := [-0.025 -0.005 -0.01 0.01 -0.01 0.01]
+
+#-------- gauge -----------------------------------------------------------
+#gauge_t := 0
+#gauge_i := 0
+harmonize := 1
+
+## Will's binary merger parameters
+## NOTE: xi_t0_t/xi_t0_i is time at which damped harmonic gauge turns on
+gauge_t := 30
+n1_t := 4
+xi1_t := 40.0
+xi2_t := 0.5
+xi4_t := 0.5
+xi_t_mod_t := 1.0
+xi_t0_t := 0.1
+xi3_t := 1000
+
+gauge_i := 30
+n1_i := 4
+xi1_i := 40.0
+xi2_i := 0.0
+xi4_i := 0.5
+xi_t_mod_i := 1.0
+xi_t0_i := 0.1
+xi3_i := 1000
+
+#Constraint dampening 
+kappa_cd := -300
+kappa_cd_cosn := 4
+rho_cd := 0.0
+
+#KO dissipation epsilon
+tn_eps_diss := 0.75
+diss_use_6th_order := 1
+
+#CFL dt = lambda*dx
+lambda := 0.5
+
+#Checkpointing--------------------------------------------------------------------
+cp_restart := 0
+cp_restore_fname := "cp_L0"
+cp_delta_t_hrs := 22.00 
+cp_save_fname := "cp_L0_01"
+
+#Controls truncation error threshold for adapting mesh refinement
+TRE_max := 1.0e-5
+TRE_vars := [ "gb_tt" "gb_tx" "gb_ty" "gb_tz" "gb_xx" "gb_xy" "gb_xz" "gb_yy" "gb_yz" "gb_zz" ]
+TRE_buffer := 8 
+TRE_ibc_buffer := 4 
+TRE_ibc_a_buffer := 4 
+TRE_exc_buffer := 2
+TRE_exc_buffer_lmin := 5
+TRE_ibcp_buffer := 0
+TRE_sgpbh := 1
+regrid_interval := 16 
+regrid_min_lev := 4 
+TRE_norm := 0
+regrid_script := 2
+regrid_script_name = "bs.rgs"
+
+#-------- Apparent Horizon Search parameters --------------------------------------------------------------
+AH_Ntheta := 17
+AH_Ntheta_2 := 17 
+AH_Ntheta_3 := 17 
+AH_Nphi :=  33 
+AH_Nphi_2 := 33
+AH_Nphi_3 := 33
+AH_Lmin := 7  
+AH_Lmin_3 := 6  
+AH_Lmax := 100
+AH_max_iter := 10000
+AH_max_iter_2 := 10000
+AH_max_iter_3 := 100000
+AH_freq := 1 
+AH_freq_aft := 1
+AH_freq_3 := 4 
+AH_freq_aft_3 := 2
+AH_tol := 1.0e-3
+AH_tol_aft := 1.0e-3
+AH_tol_3 := 1.0e-3 
+AH_tol_aft_3 := 1.0e-3
+AH_max_tol_inc := 100 
+AH_reset_scale := 1.2
+AH_r0 := 0.023
+AH_r1 := 0.023
+AH_rsteps := 1
+AH_lambda := 1.0e-4 
+AH_lambda_min := 1.0e-4 
+AH_lambda_3 := 1.0e-4 
+AH_lambda_min_3 := 1.0e-4 
+AH_maxinc := 20
+AH_eps := 1.5
+AH_xc := [ 0.0 0.0 0.0 ]
+AH_tmin := 0.0 
+AH_tmin_3 := 0.45 
+use_AH_new_smooth := 1
+
+#-----Excision surface parameters (Once a BH is found)-------------------------------
+do_ex := 1
+ex := 1.0
+ex_rmin := 0.0001
+# rbuf is a fraction of r
+ex_rbuf := 0.5
+ex_rbuf_a := 0.35
+ex_rbuf_2 := 0.5
+ex_rbuf_a_2 := 0.35
+ex_reset_rbuf := 1
+ex_max_repop := 1 
+ex_repop_io := 2
+ex_dphi_repop := 1
+ex_relative_rbuf := 1
+ex_max_rbuf := 0.0
+ex_freeze_r_omt := 1
+
+#-----Misc.---------------------------------------------------------------------
+flat_space := 0
+tre_scale_n := 0
+tre_cut_off := 0.75
+adm_skip_fn_ah := 1
+phi4_on := 0
+phi1_on := 0
+
+gen_ic := 1
+
+min_width := [16 16 16]
+min_mg_cwidth := [9 9 9]
+rho_sp := 2
+rho_tm := 2
+
+gdm_no_overlap := 1
+MG_max_iter := 25
+MG_min_iter := 1
+MG_max_citer := 1000
+MG_pre_swp := 6
+diss_bdy := 1
+repop_diss_bdy := 1
+diss_all_past := 0
+MG_pst_swp := 6
+MG_w0 := 1.0
+skip_frg := 0
+evo_ssc := 0
+
+id_method := 0
+id_pl_method := 3
+
+np1_initial_guess := 1
+io_node := 0
+
+max_t_interp_order := 3
+diff_method_evo := 4
+
+diss_bdy := 1
+repop_diss_bdy := 1
+diss_all_past := 0
+
+evo_tol := 1.0e-5
+MG_tol := 1.0e-5
+MG_crtol := 1e-2
+MG_extrap_method := 0
+MG_eps_c := 1.0
+
+which_gb_ii_res := 1
+no_ires := 0
+psi4 := 1
+
+cls_merge_dist := 4
+cls_method := 0
+cls_align_mode := 1
+
+calc_global_var_norms := 1
+global_var_norm_floor := 1
+use_bbh_extrap := 1
+
+echo_params := 1
+pamr_trace_lev := 0
+MG_trace := 0
+MG_DV_trace := 0
+MG_DV_trace_t_on := -1
+MG_DV_trace_t_off := 1
+evo_trace := 1
+evo_DV_trace := 0
+evo_DV_trace_t_on := -1
+evo_DV_trace_t_off := 1
+ID_DV_trace := 0
+regrid_trace := 0
+
+ghost_width := [3 3 3] 
+
+use_rk4_sf := 1
+use_rk4_csf := 1
+use_rk4_g := 1
+use_rk4_h := 1
+use_rk2_hydro := 1
+
+evo_max_iter := 4
+evo_min_iter := 4
+re_interp_width := 8
+re_interp_width_c := 2
+
+AMR_bdy_width_c := 2
+AMR_bdy_width := 1
+
+t_interp_substeps := [0 0.5 0.5 1]
