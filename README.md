@@ -7,7 +7,7 @@ See the `INSTALL.md` file for a list of dependencies and some
 basic installation guidance.
 
 For more detailed information about the software ecosystem
-that `gh3d2m` came from, see Matthew Coptuik's 
+that `gh3d2m` comes from/is a part of, see Matthew Coptuik's 
 [website](http://laplace.physics.ubc.ca/)
 (under ``Software \& Related'').
 
