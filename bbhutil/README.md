@@ -25,6 +25,9 @@ From Choptuik's website, the general prerequisits are
 
 The original link: [here](http://laplace.physics.ubc.ca/Doc/rnpletal/rnpletal-ubuntu.html)
 
+The following should download (at least most of)
+the dependencies needed by the bbhutil libraries.
+
 ```
 sudo apt-get install gfortran
 sudo apt-get install flex
@@ -35,9 +38,9 @@ sudo apt-get install libglu1-mesa-dev
 sudo apt-get install mesa-utils
 sudo apt-get install libjpeg62
 sudo apt-get install libjpeg62-dev
-#sudo apt-get install libforms-dev
-#sudo apt-get install libformsgl2
-#sudo apt-get install libforms-bin
+sudo apt-get install libforms-dev
+sudo apt-get install libformsgl2
+sudo apt-get install libforms-bin
 sudo apt-get install libxext-dev
 sudo apt-get install libtiff-dev
 sudo apt-get install libtiff-opengl
