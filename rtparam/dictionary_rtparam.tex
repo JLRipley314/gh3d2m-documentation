@@ -665,7 +665,8 @@ see \href{https://github.com/JLRipley314/Standalone-TwoPunctures-C-Cpp}{here}.
 \newpage
 %=============================================================================
 \section*{Einstein scalar Gauss-Bonnet parameters}
-See \cite{East:2020hgw}.
+See \cite{East:2020hgw} for a more general discussion of the numerical
+implementation.
 \begin{table}[h]
    \centering 
    \begin{tabular}{ccc}
@@ -677,11 +678,33 @@ See \cite{East:2020hgw}.
       &
       (Do not) evolve scalar field
       \\ \\
-      lambda\_mg 
+      lambda\_mg, sigma\_mg 
       &
       $\mathbb{R}$
       &
-      scalar GB coupling $\lambda$ in $\lambda\phi\mathcal{G}$
+      scalar GB coupling paramgers; their definitions depends on
+      \\
+      & & 
+      the value of gb\_scalar\_type
+      \\ \\
+      gb\_scalar\_type
+      &
+      $\mathbb{N}$
+      &
+      See \texttt{csf.f} for up-to-date definitions;
+      \\& & 
+      e.g. for 
+      gb\_scalar\_type=1, $\beta'=$lambda\_mg, $\beta''=0$
+      \\& & 
+      (see \cite{East:2020hgw} for the definition of $\beta$)
+      \\ \\
+      vphi\_\{2,...\}
+      &
+      $\mathbb{R}$
+      &
+      Scalar field potential, e.g. $V=$vphi\_2$\times\phi^2+\cdot$;
+      \\& &
+      see \texttt{csf.f} for more details.
       \\ \\
       ts\_mg 
       &
@@ -693,7 +716,7 @@ See \cite{East:2020hgw}.
       &
       $\mathbb{R}_+$
       &
-      Time to start reducing coupling parameter.
+      Time to start(ts)/stop(te) reducing coupling parameter to zero.
       \\ \\
       damp\_mg\_r 
       &
